@@ -1,0 +1,41 @@
+/* students/static/students/css/style.css */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.header-title {
+    background-color: #f8d7da; /* Rosa claro */
+    color: #58151c; /* Rojo oscuro */
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.section-title {
+    background-color: #cff4fc; /* Azul claro */
+    color: #055160; /* Azul oscuro */
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.student-count {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 0 10px;
+    border: 3px solid #ffc107; /* Amarillo más oscuro para el borde */
+    /* Estilo de sello postal */
+    background-image:
+        radial-gradient(circle at 100% 0, transparent 6px, yellow 6px),
+        radial-gradient(circle at 0 0, transparent 6px, yellow 6px),
+        radial-gradient(circle at 0 100%, transparent 6px, yellow 6px),
+        radial-gradient(circle at 100% 100%, transparent 6px, yellow 6px);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    background-position: top left, top right, bottom left, bottom right;
+}
+
+.table thead {
+    font-weight: bold;
+}

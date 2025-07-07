@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Estudiantes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="{% static 'alumnos/css/style.css' %}">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1 class="text-center p-3 header-title">Proyecto CRUD MVT con vistas basado en funciones</h1>
+
+    <div class="row">
+        <!-- Columna para el Formulario de Añadir -->
+        <div class="col-md-4">
+            <div class="section-title p-2 ps-3 mb-3">
+                Agregar Nuevo Estudiante
+            </div>
+            <form action="{% url 'agregar_y_mostrar' %}" method="post" class="p-3 border rounded">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-success">Agregar</button>
+            </form>
+        </div>
+
+        <!-- Columna para la Tabla de Estudiantes -->
+        <div class="col-md-8">
+            <div class="section-title p-2 ps-3 mb-3 d-flex justify-content-between align-items-center">
+                Mostrar Informacion de los estudiantes
+                <span class="student-count">{{ estudiantes.count }}</span>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for estudiante in estudiantes %}
+                    <tr>
+                        <th scope="row">{{ estudiante.id }}</th>
+                        <td>{{ estudiante.nombre }}</td>
+                        <td>{{ estudiante.email }}</td>
+                        <td>{{ estudiante.password }}</td>
+                        <td>
+                            <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{% url 'borrar_estudiante' estudiante.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
