@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos los libros</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'lista_libros'%}">Biblioteca cbtis 128</a></li>
+                <li><a href="{% url 'lista_libros'%}">Inicio</a></li>
+                <li><a href="{% url 'agregar_libro' %}">Agregar Libro</a></li>
+                <li><a href="/admin/">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Todos los libros</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for libro in libros %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.precio }}</td>
+                    <td>
+                    <td>
+                        <a href="{% url 'editar_libro' libro.id %}" class="btn-green">editar</a>
+                        <a href="{% url 'eliminar_libro' libro.id %}" class="btn-red" onclick="return confirm('¿Seguro que quieres eliminar este libro?')">borrar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

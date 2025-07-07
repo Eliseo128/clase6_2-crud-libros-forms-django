@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Libro</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Biblioteca cbtis 128</a></li>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="{% url 'agregar_libro' %}">Agregar Libro</a></li>
+                <li><a href="/admin/">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <img src="{% static 'img/cbtis128.jpeg' %}" alt="CBTIS 128">
+            <section class="form-section">
+                <h2>Agregar Libro</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn-green">Guardar</button>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
