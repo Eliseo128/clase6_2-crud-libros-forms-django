@@ -1,0 +1,56 @@
+<!-- templates/estudiantes/index.html -->
+{% extends 'estudiantesv2/base.html' %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="text-center p-3 mb-3 bg-danger-subtle rounded">
+    <h2 class="fw-bold text-danger">Proyecto <span class="text-dark">CRUD MVT</span> con vistas basado en funciones</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="p-3 bg-info-subtle rounded">
+            <h5 class="fw-bold">Agregar Nuevo Estudiante</h5>
+        </div>
+        <div class="p-3 border rounded bg-white">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="p-3 bg-info-subtle rounded d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0">Mostrar Información de los estudiantes</h5>
+            <span class="badge bg-warning text-dark fs-4">{{ estudiantes|length }}</span>
+        </div>
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for est in estudiantes %}
+                <tr>
+                    <td>{{ est.id }}</td>
+                    <td>{{ est.nombre }}</td>
+                    <td>{{ est.email }}</td>
+                    <td>{{ est.password }}</td>
+                    <td>
+                        <a href="{% url 'editar_estudiante' est.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'borrar_estudiante' est.id %}" class="btn btn-danger btn-sm">Borrar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

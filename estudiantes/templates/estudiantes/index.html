@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD Estudiantes</title>
+</head>
+<body>
+    <h1>Proyecto CRUD MVT con vistas basado en funciones</h1>
+    <div>
+        <h2>Agregar Nuevo Estudiante</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+    <div>
+        <h2>Lista de Estudiantes</h2>
+        <table>
+            <tr>
+                <th>ID</th><th>Nombre</th><th>Email</th><th>Password</th><th>Acciones</th>
+            </tr>
+            {% for est in estudiantes %}
+            <tr>
+                <td>{{ est.id }}</td>
+                <td>{{ est.nombre }}</td>
+                <td>{{ est.email }}</td>
+                <td>{{ est.password }}</td>
+                <td>
+                    <a href="{% url 'editar_estudiante' est.id %}">Editar</a>
+                    <a href="{% url 'borrar_estudiante' est.id %}">Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

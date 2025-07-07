@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Estudiante</title>
+</head>
+<body>
+    <h1>Editar Información del Estudiante</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Actualizar</button>
+        <a href="{% url 'index' %}">Cancelar</a>
+    </form>
+</body>
+</html>
